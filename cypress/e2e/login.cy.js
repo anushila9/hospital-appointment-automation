@@ -22,6 +22,6 @@ describe('Hospital Login Page', ()=> {
         cy.get('#email').type('patient@medicare.com')
         cy.get('#password').type('Test@1234')
         cy.get('#loginBtn').click()
-        cy.url().should('include', 'dashboard.html')
+        cy.url().should('include', 'dashboard')
     })
 })
