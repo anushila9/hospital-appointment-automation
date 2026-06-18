@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book Appointment - MediCare Hospital</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f4f8;
+        }
+
+        .navbar {
+            background: #2c7be5;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .form-card {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 550px;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #888;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            color: #555;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #2c7be5;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #2c7be5;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #1a68d1;
+        }
+
+        .error-msg {
+            color: red;
+            font-size: 13px;
+            margin-bottom: 10px;
+            min-height: 18px;
+        }
+
+        .success-msg {
+            color: green;
+            font-size: 14px;
+            margin-bottom: 10px;
+            min-height: 18px;
+            font-weight: bold;
+        }
+
+        textarea::placeholder {
+            font-family: Arial, sans-serif;
+            color: #aaa;
+            font-size: 14px;
+            font-style: normal;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <h1>🏥 MediCare Hospital</h1>
+        <div class="nav-links">
+            <a href="dashboard.html" id="dashboardLink">Dashboard</a>
+            <a href="login.html" id="logoutBtn">Logout</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="form-card">
+            <h2>Book an Appointment</h2>
+            <p class="subtitle">Fill in the details below to schedule your visit</p>
+
+            <form id="appointmentForm">
+
+                <div class="form-group">
+                    <label for="department">Department</label>
+                    <select id="department" name="department">
+                        <option value="">-- Select Department --</option>
+                        <option value="cardiology">Cardiology</option>
+                        <option value="neurology">Neurology</option>
+                        <option value="general">General Medicine</option>
+                        <option value="orthopedic">Orthopedic</option>
+                        <option value="pediatrics">Pediatrics</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="doctor">Select Doctor</label>
+                    <select id="doctor" name="doctor">
+                        <option value="">-- Select Doctor --</option>
+                        <option value="dr-ram">Dr. Ram Sharma (Cardiology)</option>
+                        <option value="dr-sita">Dr. Sita Thapa (Neurology)</option>
+                        <option value="dr-hari">Dr. Hari Poudel (General)</option>
+                        <option value="dr-krishna">Dr. Krishna KC (Orthopedic)</option>
+                        <option value="dr-maya">Dr. Maya Gurung (Pediatrics)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="appointmentDate">Appointment Date</label>
+                    <input type="date" id="appointmentDate" name="appointmentDate" />
+                </div>
+
+                <div class="form-group">
+                    <label for="reason">Reason for Visit</label>
+                    <textarea id="reason" name="reason" placeholder="Describe your symptoms or reason for visit"
+                        rows="4"></textarea>
+                </div>
+
+                <div id="formError" class="error-msg"></div>
+                <div id="formSuccess" class="success-msg"></div>
+
+                <button type="submit" id="bookBtn">Book Appointment</button>
+
+            </form>
+        </div>
+    </div>
+    <script>
+        document.getElementById('appointmentForm').addEventListener('submit', function (e) {
+            e.preventDefault()
+
+            const department = document.getElementById('department').value
+            const doctor = document.getElementById('doctor').value
+            const date = document.getElementById('appointmentDate').value
+            const reason = document.getElementById('reason').value
+            const errorMsg = document.getElementById('formError')
+            const successMsg = document.getElementById('formSuccess')
+
+            // Clear previous messages
+            errorMsg.textContent = ''
+            successMsg.textContent = ''
+
+            // Validation
+            if (!department || !doctor || !date || !reason) {
+                errorMsg.textContent = 'Please fill in all fields.'
+                return
+            }
+
+            // Success
+            successMsg.textContent = 'Appointment booked successfully!'
+            document.getElementById('appointmentForm').reset()
+        })
+    </script>
+
+</body>
+
+</html>

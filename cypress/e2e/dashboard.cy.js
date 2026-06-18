@@ -1,6 +1,6 @@
 describe('Patient Dashboard', ()=>{
     beforeEach(() => {
-        cy.visit('http://localhost:3000/dashboard')
+        cy.visit('http://localhost:3000/dashboard.html')
     })
 
     it('should load the dashboard page', () => {
