@@ -1,6 +1,6 @@
 describe('Hospital Login Page', ()=> {
     beforeEach(() => {
-        cy.visit('http://localhost:3000/login.html')
+        cy.visit('/login.html')
     })
 
     it('should load the login page', () => {

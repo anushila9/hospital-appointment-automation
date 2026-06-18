@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register - MediCare Hospital</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f8;
+    }
+    .navbar {
+      background: #2c7be5;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      background: rgba(255,255,255,0.2);
+    }
+    .container {
+      display: flex;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+    .form-card {
+      background: white;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 450px;
+      text-align: center;
+    }
+    h2 { color: #333; margin-bottom: 8px; }
+    .subtitle { color: #888; margin-bottom: 25px; font-size: 14px; }
+    .form-group { text-align: left; margin-bottom: 15px; }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #555;
+      font-weight: bold;
+      font-size: 14px;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+    input:focus { border-color: #2c7be5; outline: none; }
+    input::placeholder { color: #aaa; font-style: normal; }
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #2c7be5;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover { background: #1a68d1; }
+    .error-msg {
+      color: red;
+      font-size: 13px;
+      margin-bottom: 10px;
+      min-height: 18px;
+      text-align: left;
+    }
+    .success-msg {
+      color: green;
+      font-size: 14px;
+      margin-bottom: 10px;
+      min-height: 18px;
+      font-weight: bold;
+    }
+    a { color: #2c7be5; }
+    p { margin-top: 20px; font-size: 14px; color: #666; }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <h1>🏥 MediCare Hospital</h1>
+    <div class="nav-links">
+      <a href="login.html" id="loginLink">Login</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="form-card">
+      <h2>Create Patient Account</h2>
+      <p class="subtitle">Register to book appointments online</p>
+
+      <form id="registerForm">
+
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input 
+            type="text" 
+            id="fullName" 
+            placeholder="Enter your full name"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input 
+            type="email" 
+            id="email" 
+            placeholder="Enter your email"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input 
+            type="tel" 
+            id="phone" 
+            placeholder="98XXXXXXXX"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input 
+            type="password" 
+            id="password" 
+            placeholder="Minimum 6 characters"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input 
+            type="password" 
+            id="confirmPassword" 
+            placeholder="Repeat your password"
+          />
+        </div>
+
+        <div id="errorMessage" class="error-msg"></div>
+        <div id="successMessage" class="success-msg"></div>
+
+        <button type="submit" id="registerBtn">Create Account</button>
+
+      </form>
+
+      <p>Already have an account? 
+        <a href="login.html" id="backToLogin">Login here</a>
+      </p>
+    </div>
+  </div>
+  <script>
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+      e.preventDefault()
+
+      const fullName = document.getElementById('fullName').value
+      const email = document.getElementById('email').value
+      const phone = document.getElementById('phone').value
+      const password = document.getElementById('password').value
+      const confirmPassword = document.getElementById('confirmPassword').value
+      const errorMsg = document.getElementById('errorMessage')
+      const successMsg = document.getElementById('successMessage')
+
+      // Clear messages
+      errorMsg.textContent = ''
+      successMsg.textContent = ''
+
+      // Validation 1 — empty fields
+      if (!fullName || !email || !phone || !password || !confirmPassword) {
+        errorMsg.textContent = 'Please fill in all fields.'
+        return
+      }
+
+      // Validation 2 — password length
+      if (password.length < 6) {
+        errorMsg.textContent = 'Password must be at least 6 characters.'
+        return
+      }
+
+      // Validation 3 — passwords match
+      if (password !== confirmPassword) {
+        errorMsg.textContent = 'Passwords do not match.'
+        return
+      }
+
+      // Validation 4 — phone number (Nepal format)
+      if (phone.length !== 10) {
+        errorMsg.textContent = 'Phone number must be 10 digits.'
+        return
+      }
+
+      // Success
+      successMsg.textContent = 'Account created successfully! Redirecting to login...'
+      setTimeout(() => {
+        window.location.href = 'login.html'
+      }, 2000)
+    })
+  </script>
+</body>
+</html>

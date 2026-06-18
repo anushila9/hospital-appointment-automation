@@ -1,6 +1,6 @@
 describe('Book Appointment Page', () => {
     beforeEach(() => {
-        cy.visit('http://localhost:3000/appointments.html');
+        cy.visit('/appointments.html');
     })
     it('should load the appointments page successfully', () => {
         cy.get('.navbar').should('be.visible')
