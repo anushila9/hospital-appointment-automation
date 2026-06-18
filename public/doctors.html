@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Doctors - MediCare Hospital</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; background: #f0f4f8; }
+    .navbar {
+      background: #2c7be5;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-links { display: flex; gap: 20px; }
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      background: rgba(255,255,255,0.2);
+    }
+    .container { padding: 30px; }
+    .page-header { text-align: center; margin-bottom: 25px; }
+    .page-header h2 { color: #333; font-size: 28px; }
+    .subtitle { color: #888; margin-top: 5px; }
+    .search-bar { 
+      max-width: 500px; 
+      margin: 0 auto 30px; 
+    }
+    #searchInput {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+    #searchInput:focus { border-color: #2c7be5; outline: none; }
+    #doctorsList {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .doctor-card {
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+    .doctor-card:hover { transform: translateY(-5px); }
+    .doctor-avatar { font-size: 50px; margin-bottom: 15px; }
+    .doctor-name { color: #333; margin-bottom: 8px; }
+    .doctor-dept { color: #2c7be5; font-size: 14px; margin-bottom: 5px; }
+    .doctor-exp { color: #888; font-size: 13px; margin-bottom: 15px; }
+    .book-btn {
+      padding: 8px 20px;
+      background: #2c7be5;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .book-btn:hover { background: #1a68d1; }
+    #searchInput::placeholder { color: #aaa; font-style: normal; }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <h1>🏥 MediCare Hospital</h1>
+    <div class="nav-links">
+      <a href="dashboard.html" id="dashboardLink">Dashboard</a>
+      <a href="appointments.html" id="bookBtn">Book Appointment</a>
+      <a href="login.html" id="logoutBtn">Logout</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="page-header">
+      <h2>Our Doctors</h2>
+      <p class="subtitle">Find the right specialist for you</p>
+    </div>
+
+    <div class="search-bar">
+      <input 
+        type="text" 
+        id="searchInput" 
+        placeholder="Search by name or department..."
+      />
+    </div>
+
+    <div id="doctorsList">
+
+      <div class="doctor-card" data-department="cardiology">
+        <div class="doctor-avatar">👨‍⚕️</div>
+        <h3 class="doctor-name">Dr. Ram Sharma</h3>
+        <p class="doctor-dept">Cardiology</p>
+        <p class="doctor-exp">15 years experience</p>
+        <button class="book-btn" onclick="window.location.href='appointments.html'">
+          Book Appointment
+        </button>
+      </div>
+
+      <div class="doctor-card" data-department="neurology">
+        <div class="doctor-avatar">👩‍⚕️</div>
+        <h3 class="doctor-name">Dr. Sita Thapa</h3>
+        <p class="doctor-dept">Neurology</p>
+        <p class="doctor-exp">12 years experience</p>
+        <button class="book-btn" onclick="window.location.href='appointments.html'">
+          Book Appointment
+        </button>
+      </div>
+
+      <div class="doctor-card" data-department="general">
+        <div class="doctor-avatar">👨‍⚕️</div>
+        <h3 class="doctor-name">Dr. Hari Poudel</h3>
+        <p class="doctor-dept">General Medicine</p>
+        <p class="doctor-exp">10 years experience</p>
+        <button class="book-btn" onclick="window.location.href='appointments.html'">
+          Book Appointment
+        </button>
+      </div>
+
+      <div class="doctor-card" data-department="orthopedic">
+        <div class="doctor-avatar">👨‍⚕️</div>
+        <h3 class="doctor-name">Dr. Krishna KC</h3>
+        <p class="doctor-dept">Orthopedic</p>
+        <p class="doctor-exp">8 years experience</p>
+        <button class="book-btn" onclick="window.location.href='appointments.html'">
+          Book Appointment
+        </button>
+      </div>
+
+      <div class="doctor-card" data-department="pediatrics">
+        <div class="doctor-avatar">👩‍⚕️</div>
+        <h3 class="doctor-name">Dr. Maya Gurung</h3>
+        <p class="doctor-dept">Pediatrics</p>
+        <p class="doctor-exp">9 years experience</p>
+        <button class="book-btn" onclick="window.location.href='appointments.html'">
+          Book Appointment
+        </button>
+      </div>
+
+    </div>
+  </div>
+  <script>
+    document.getElementById('searchInput').addEventListener('input', function() {
+      const searchTerm = this.value.toLowerCase()
+      const cards = document.querySelectorAll('.doctor-card')
+
+      cards.forEach(function(card) {
+        const name = card.querySelector('.doctor-name').textContent.toLowerCase()
+        const dept = card.querySelector('.doctor-dept').textContent.toLowerCase()
+
+        if (name.includes(searchTerm) || dept.includes(searchTerm)) {
+          card.style.display = 'block'
+        } else {
+          card.style.display = 'none'
+        }
+      })
+    })
+  </script>
+</body>
+</html>
