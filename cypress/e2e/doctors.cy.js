@@ -1,24 +1,14 @@
 describe('Our Doctors Page', () => {
 
-  // Our fake API data
-  const mockDoctors = [
-    { name: 'Dr. Ram Sharma', department: 'Cardiology', experience: '15 years experience' },
-    { name: 'Dr. Sita Thapa', department: 'Neurology', experience: '12 years experience' },
-    { name: 'Dr. Hari Poudel', department: 'General Medicine', experience: '10 years experience' },
-    { name: 'Dr. Krishna KC', department: 'Orthopedic', experience: '8 years experience' },
-    { name: 'Dr. Maya Gurung', department: 'Pediatrics', experience: '9 years experience' },
-  ]
-
   beforeEach(() => {
-    // Intercept the API call and return fake data
-    cy.intercept('GET', '/api/doctors', {
-      statusCode: 200,
-      body: mockDoctors
-    }).as('getDoctors')
+    cy.fixture('doctors').then((doctors) => {
+      cy.intercept('GET', '/api/doctors', {
+        statusCode: 200,
+        body: doctors
+      }).as('getDoctors')
+    })
 
     cy.visit('/doctors.html')
-
-    // Wait for the API call to complete
     cy.wait('@getDoctors')
   })
 

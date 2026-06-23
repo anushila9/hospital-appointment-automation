@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Dr. Ram Sharma",
+    "department": "Cardiology",
+    "experience": "15 years experience"
+  },
+  {
+    "name": "Dr. Sita Thapa",
+    "department": "Neurology",
+    "experience": "12 years experience"
+  },
+  {
+    "name": "Dr. Hari Poudel",
+    "department": "General Medicine",
+    "experience": "10 years experience"
+  },
+  {
+    "name": "Dr. Krishna KC",
+    "department": "Orthopedic",
+    "experience": "8 years experience"
+  },
+  {
+    "name": "Dr. Maya Gurung",
+    "department": "Pediatrics",
+    "experience": "9 years experience"
+  }
+]

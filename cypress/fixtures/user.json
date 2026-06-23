@@ -1,0 +1,16 @@
+{
+  "validUser": {
+    "email": "patient@medicare.com",
+    "password": "Test@1234"
+  },
+  "invalidUser": {
+    "email": "wrong@email.com",
+    "password": "wrongpassword"
+  },
+  "newPatient": {
+    "fullName": "Anushila Basnet",
+    "email": "anushila@gmail.com",
+    "phone": "9812345678",
+    "password": "test@12345"
+  }
+}
