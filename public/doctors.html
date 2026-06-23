@@ -99,67 +99,45 @@
 
     <div id="doctorsList">
 
-      <div class="doctor-card" data-department="cardiology">
-        <div class="doctor-avatar">👨‍⚕️</div>
-        <h3 class="doctor-name">Dr. Ram Sharma</h3>
-        <p class="doctor-dept">Cardiology</p>
-        <p class="doctor-exp">15 years experience</p>
-        <button class="book-btn" onclick="window.location.href='appointments.html'">
-          Book Appointment
-        </button>
-      </div>
-
-      <div class="doctor-card" data-department="neurology">
-        <div class="doctor-avatar">👩‍⚕️</div>
-        <h3 class="doctor-name">Dr. Sita Thapa</h3>
-        <p class="doctor-dept">Neurology</p>
-        <p class="doctor-exp">12 years experience</p>
-        <button class="book-btn" onclick="window.location.href='appointments.html'">
-          Book Appointment
-        </button>
-      </div>
-
-      <div class="doctor-card" data-department="general">
-        <div class="doctor-avatar">👨‍⚕️</div>
-        <h3 class="doctor-name">Dr. Hari Poudel</h3>
-        <p class="doctor-dept">General Medicine</p>
-        <p class="doctor-exp">10 years experience</p>
-        <button class="book-btn" onclick="window.location.href='appointments.html'">
-          Book Appointment
-        </button>
-      </div>
-
-      <div class="doctor-card" data-department="orthopedic">
-        <div class="doctor-avatar">👨‍⚕️</div>
-        <h3 class="doctor-name">Dr. Krishna KC</h3>
-        <p class="doctor-dept">Orthopedic</p>
-        <p class="doctor-exp">8 years experience</p>
-        <button class="book-btn" onclick="window.location.href='appointments.html'">
-          Book Appointment
-        </button>
-      </div>
-
-      <div class="doctor-card" data-department="pediatrics">
-        <div class="doctor-avatar">👩‍⚕️</div>
-        <h3 class="doctor-name">Dr. Maya Gurung</h3>
-        <p class="doctor-dept">Pediatrics</p>
-        <p class="doctor-exp">9 years experience</p>
-        <button class="book-btn" onclick="window.location.href='appointments.html'">
-          Book Appointment
-        </button>
-      </div>
+      
 
     </div>
   </div>
   <script>
+    // Fetch doctors from API
+    fetch('/api/doctors')
+      .then(response => response.json())
+      .then(function(doctors) {
+        const list = document.getElementById('doctorsList')
+        list.innerHTML = ''
+
+        doctors.forEach(function(doctor) {
+          list.innerHTML += `
+            <div class="doctor-card" data-department="${doctor.department}">
+              <div class="doctor-avatar">👨‍⚕️</div>
+              <h3 class="doctor-name">${doctor.name}</h3>
+              <p class="doctor-dept">${doctor.department}</p>
+              <p class="doctor-exp">${doctor.experience}</p>
+              <button class="book-btn" 
+                onclick="window.location.href='appointments.html'">
+                Book Appointment
+              </button>
+            </div>
+          `
+        })
+      })
+      .catch(function() {
+        document.getElementById('doctorsList').innerHTML = 
+          '<p id="errorMsg">Failed to load doctors. Please try again.</p>'
+      })
+
+    // Search functionality
     document.getElementById('searchInput').addEventListener('input', function() {
       const searchTerm = this.value.toLowerCase()
       const cards = document.querySelectorAll('.doctor-card')
-
       cards.forEach(function(card) {
         const name = card.querySelector('.doctor-name').textContent.toLowerCase()
         const dept = card.querySelector('.doctor-dept').textContent.toLowerCase()
-
         if (name.includes(searchTerm) || dept.includes(searchTerm)) {
           card.style.display = 'block'
         } else {
